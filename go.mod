@@ -1,8 +1,9 @@
 module github.com/owenliang/go-push
 
-go 1.13
+go 1.14
 
 require (
-	github.com/gorilla/websocket v1.4.1-0.20181206070239-95ba29eb981b
-	golang.org/x/net v0.0.0-20191108225301-c7154b74f18f
+	github.com/gin-gonic/gin v1.6.3
+	github.com/gorilla/websocket v1.4.2
+	golang.org/x/net v0.0.0-20200707034311-ab3426394381
 )

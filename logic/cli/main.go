@@ -1,12 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"os"
 	"flag"
-	"runtime"
-	"time"
+	"fmt"
 	"github.com/owenliang/go-push/logic"
+	"os"
+	"runtime"
 )
 
 var (
@@ -45,10 +44,6 @@ func main()  {
 
 	if err = logic.InitService(); err != nil {
 		goto ERR
-	}
-
-	for {
-		time.Sleep(1 * time.Second)
 	}
 
 	os.Exit(0)

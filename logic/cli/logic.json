@@ -1,12 +1,5 @@
 {
-  "HTTP/1服务端口": "接收业务方调用",
-  "servicePort": 7799,
-
-  "接口读超时": "单位毫秒",
-  "serviceReadTimeout": 2000,
-
-  "接口写超时": "单位毫秒",
-  "serviceWriteTimeout": 2000,
+  "servicePort": 8080,
 
   "网关列表": "推送将分发给所有网关",
   "gatewayList": [

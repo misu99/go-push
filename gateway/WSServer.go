@@ -1,12 +1,13 @@
 package gateway
 
 import (
-	"net/http"
-	"time"
 	"net"
+	"net/http"
 	"strconv"
-	"github.com/gorilla/websocket"
 	"sync/atomic"
+	"time"
+
+	"github.com/gorilla/websocket"
 )
 
 // 	WebSocket服务端
@@ -16,9 +17,9 @@ type WSServer struct {
 }
 
 var (
-	G_wsServer *WSServer
+	GWsServer *WSServer
 
-	wsUpgrader = websocket.Upgrader{
+	wsUpgrade = websocket.Upgrader{
 		// 允许所有CORS跨域请求
 		CheckOrigin: func(r *http.Request) bool {
 			return true
@@ -35,12 +36,12 @@ func handleConnect(resp http.ResponseWriter, req *http.Request) {
 	)
 
 	// WebSocket握手
-	if wsSocket, err = wsUpgrader.Upgrade(resp, req, nil); err != nil {
+	if wsSocket, err = wsUpgrade.Upgrade(resp, req, nil); err != nil {
 		return
 	}
 
 	// 连接唯一标识
-	connId = atomic.AddUint64(&G_wsServer.curConnId, 1)
+	connId = atomic.AddUint64(&GWsServer.curConnId, 1)
 
 	// 初始化WebSocket的读写协程
 	wsConn = InitWSConnection(connId, wsSocket)
@@ -58,7 +59,7 @@ func InitWSServer() (err error) {
 
 	// 路由
 	mux = http.NewServeMux()
-	mux.HandleFunc("/connect", handleConnect)
+	mux.HandleFunc("/ws", handleConnect)
 
 	// HTTP服务
 	server = &http.Server{
@@ -73,13 +74,15 @@ func InitWSServer() (err error) {
 	}
 
 	// 赋值全局变量
-	G_wsServer = &WSServer{
+	GWsServer = &WSServer{
 		server: server,
 		curConnId: uint64(time.Now().Unix()),
 	}
 
 	// 拉起服务
-	go server.Serve(listener)
+	go func() {
+		_ = server.Serve(listener)
+	}()
 
 	return
 }

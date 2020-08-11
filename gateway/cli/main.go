@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/owenliang/go-push/gateway"
+	"flag"
 	"fmt"
 	"os"
-	"flag"
 	"runtime"
-	"time"
+
+	"github.com/owenliang/go-push/gateway"
 )
 
 var (
@@ -59,10 +59,6 @@ func main()  {
 	// 初始化service接口
 	if err = gateway.InitService(); err != nil {
 		goto ERR
-	}
-
-	for {
-		time.Sleep(1 * time.Second)
 	}
 
 	os.Exit(0)

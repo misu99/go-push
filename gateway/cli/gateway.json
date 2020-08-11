@@ -1,6 +1,6 @@
 {
   "websocket监听端口": "建议nginx做代理转发",
-  "wsPort": 7777,
+  "wsPort": 9001,
 
   "websocket HTTP握手读超时": "单位毫秒",
   "wsReadTimeout": 2000,
@@ -31,12 +31,6 @@
 
   "内部通讯HTTP2端口": "严禁该端口暴露到外网",
   "servicePort": 7788,
-
-  "内部通讯HTTP2读超时": "单位毫秒",
-  "serviceReadTimeout": 2000,
-
-  "内部通讯HTTP2写超时": "单位毫秒",
-  "serviceWriteTimeout": 2000,
 
   "内部通讯HTTP2 TLS证书": "私有证书,默认有效期10年",
   "serverPem": "./default.pem",
